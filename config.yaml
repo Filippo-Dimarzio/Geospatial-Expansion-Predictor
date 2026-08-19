@@ -1,0 +1,67 @@
+# Market Potential Predictor — central configuration
+# Override any value via CLI flags or environment variables (MP_* prefix).
+
+data:
+  mode: mock  # mock | real
+  region: united_states  # europe | united_states
+  districts_path: data/districts.geojson
+  raster_path: data/night_lights.tif
+  output_dir: data
+  bbox:
+    min_lon: -10.0
+    max_lon: 30.0
+    min_lat: 35.0
+    max_lat: 72.0
+  us_bbox:
+    min_lon: -125.0
+    max_lon: -66.0
+    min_lat: 24.0
+    max_lat: 50.0
+  # Administrative boundary source for real mode
+  boundary_source: osm  # osm | census_tract
+  census_state_fips: "06"  # California example for US demo tracts
+  census_county_fips: "001"
+
+pipeline:
+  zonal_backend: auto  # auto | rasterstats | exactextract | manual
+  batch_size: 50
+  use_multiprocessing: false
+  n_workers: 4
+  output_path: data/pipeline_results.geojson
+  parquet_path: data/pipeline_results.parquet
+  persist_outputs: true
+
+scoring:
+  method: weighted  # weighted | mcda | pca | ml
+  light_weight: 0.6
+  population_weight: 0.4
+  # Extended MCDA feature weights (normalized internally)
+  feature_weights:
+    mean_night_light: 0.25
+    population_density: 0.20
+    median_income: 0.15
+    road_access_score: 0.15
+    competitor_count: -0.10  # negative = fewer competitors is better
+    delivery_radius_km: 0.10
+  normalize_weights: true
+  spatial_lag_weight: 0.15
+  compute_morans_i: true
+
+opportunity:
+  business_density_percentile: 40
+  market_potential_percentile: 70
+  business_column: current_business_count
+  score_column: market_potential_score
+
+sensitivity:
+  light_weight_range: [0.2, 0.8]
+  n_steps: 7
+
+dashboard:
+  map_backend: folium  # folium | plotly
+  show_raster_layer: true
+  comparison_mode: false
+  comparison_light_weights: [0.3, 0.6, 0.9]
+
+logging:
+  level: INFO
