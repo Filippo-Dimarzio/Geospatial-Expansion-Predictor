@@ -10,7 +10,7 @@ Finding the best locations for new fulfillment hubs and delivery centers usually
 It features an end-to-end data processing pipeline, dynamic Multi-Criteria Decision Analysis (MCDA), spatial autocorrelation modeling, XGBoost scoring, and an interactive Streamlit decision dashboard.
 
 ### Validated Business Logic
-To test accuracy, I hid existing business data for 3 busy, high-activity neighborhoods. The pipeline successfully flagged all 3 hidden areas as top expansion targets—proving it reliably spots prime, untapped business opportunities.
+To test accuracy, I hid existing business data for 3 busy, high-activity neighborhoods. The pipeline successfully flagged all 3 hidden areas as top expansion targets proving it reliably spots prime, untapped business opportunities.
 
 
 ## System Architecture
