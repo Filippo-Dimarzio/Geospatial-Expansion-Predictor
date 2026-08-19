@@ -1,4 +1,4 @@
-# Geospatial Micro-Level Market Potential Predictor
+# Geospatial Expansion Predictor
 
 Identifies high-potential, under-served districts for dark-store siting by blending
 VIIRS-style night-light intensity with population density, extended MCDA features,
